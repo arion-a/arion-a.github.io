@@ -125,6 +125,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
 .mf-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font-size:14.5px;line-height:1.45}
 .mf-list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:0}
 .mf-n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 12px/22px var(--head);text-align:center}
+.mf-ex{display:block;margin-top:5px;font-size:13px;line-height:1.45;color:var(--muted)}
 .mf-list b{font-family:var(--head)}
 .mf-lv{display:flex;gap:6px;margin:14px 0 0;flex-wrap:wrap}
 .mf-pill{font:600 12.5px/1 var(--head);padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
@@ -229,8 +230,8 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
           <ol class="mf-list">
             <li><span class="mf-n">1</span><span class="mf-t"><b>Input.</b> Reality enters the model as data.</span></li>
             <li><span class="mf-n">2</span><span class="mf-t"><b>Output.</b> The model expresses and acts.</span></li>
-            <li><span class="mf-n">3</span><span class="mf-t"><b>Separability.</b> The model is not reality, so it keeps correcting its own error.</span></li>
-            <li><span class="mf-n">4</span><span class="mf-t"><b>Manipulability.</b> The more of its representations can be manipulated, the greater its intelligence.</span></li>
+            <li><span class="mf-n">3</span><span class="mf-t"><b>Separability.</b> The model is not reality, so it keeps correcting its own error.<span class="mf-ex">Same idea in different forms: loss functions, gradient descent, backpropagation, KL divergence. Each one measures the gap between approximate and exact, and shrinks it.</span></span></li>
+            <li><span class="mf-n">4</span><span class="mf-t"><b>Manipulability.</b> The more of its representations can be manipulated, the greater its intelligence. In geometric terms this is coherence: the more consistent and densely interconnected the geometry of its representation space, the better the quality of intelligence.<span class="mf-ex">Interventions and counterfactuals: Pearl's do-operator and structural causal models. The nearest machine learning counterparts are mechanistic interpretability (activation patching, interchange interventions, causal abstraction) and causal representation learning (interventions on latent variables).<br>Coherence of geometry: Riemannian metric and curvature, group equivariance, sheaf consistency (local pieces gluing into a global whole), and graph connectivity measures such as the spectral gap. There is not yet a standard objective for manipulability like the loss function is for separability.</span></span></li>
           </ol>
         </figure>
       </div>
