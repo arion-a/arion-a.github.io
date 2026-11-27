@@ -4,107 +4,140 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Abhinav Anand</title>
-<meta name="description" content="Abhinav Anand: research projects on representation learning and video models.">
+<meta name="description" content="Abhinav Anand: research on what self-supervised video models represent about the physical world, tested against pre-set baselines.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0b1020; --surface:#131a2e; --surface-2:#1a2340; --border:#27325a;
-  --text:#e8ecf8; --muted:#9aa6c8; --accent:#7aa2ff; --accent-2:#5eead4; --warn:#fbbf24;
-  --radius:14px; --max:1040px;
+  --bg:#fdf6e3; --surface:#fffdf6; --surface-2:#f6edd2; --border:#e6dcb8;
+  --text:#073642; --muted:#586e75; --accent:#2a6fb8; --accent-2:#2aa198; --accent-3:#6c71c4; --warn:#b45309;
+  --radius:16px; --max:1040px;
+  --head:"Space Grotesk",Inter,system-ui,sans-serif;
+  --body:Inter,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
-@media (prefers-color-scheme: light){
-  :root:not([data-theme="dark"]){
-    --bg:#f6f7fb; --surface:#ffffff; --surface-2:#eef1fa; --border:#d8def0;
-    --text:#14172b; --muted:#52597a; --accent:#2f5bea; --accent-2:#0f9488; --warn:#b45309;
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#06232b; --surface:#0b2e38; --surface-2:#103a46; --border:#1d4955;
+    --text:#eee8d5; --muted:#93a1a1; --accent:#6aa9e9; --accent-2:#4cc9bf; --accent-3:#9a9ee6; --warn:#fbbf24;
   }
 }
-:root[data-theme="light"]{
-  --bg:#f6f7fb; --surface:#ffffff; --surface-2:#eef1fa; --border:#d8def0;
-  --text:#14172b; --muted:#52597a; --accent:#2f5bea; --accent-2:#0f9488; --warn:#b45309;
+:root[data-theme="dark"]{
+  --bg:#06232b; --surface:#0b2e38; --surface-2:#103a46; --border:#1d4955;
+  --text:#eee8d5; --muted:#93a1a1; --accent:#6aa9e9; --accent-2:#4cc9bf; --accent-3:#9a9ee6; --warn:#fbbf24;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--text);font:17px/1.65 var(--body);-webkit-font-smoothing:antialiased;
+  background-image:
+    radial-gradient(circle at 12% 18%,color-mix(in srgb,var(--accent-2) 14%,transparent) 0,transparent 34%),
+    radial-gradient(circle at 88% 6%,color-mix(in srgb,var(--accent-3) 12%,transparent) 0,transparent 30%),
+    linear-gradient(color-mix(in srgb,var(--text) 4%,transparent) 1px,transparent 1px),
+    linear-gradient(90deg,color-mix(in srgb,var(--text) 4%,transparent) 1px,transparent 1px);
+  background-size:auto,auto,44px 44px,44px 44px;background-attachment:fixed}
 a{color:var(--accent);text-decoration:none}
 a:hover{text-decoration:underline}
-.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
-.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
-.brand{font-weight:700;letter-spacing:.2px;color:var(--text)}
-.nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;align-items:center}
-.nav a.link{color:var(--muted);font-size:15px}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+header.nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px;max-width:1180px}
+.brand{display:flex;align-items:center;gap:10px;font-family:var(--head);font-weight:700;font-size:18px;color:var(--text)}
+.brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--border)}
+.brand:hover{text-decoration:none}
+.nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;align-items:center}
+.nav a.link{color:var(--muted);font-size:15px;font-weight:500}
 .nav a.link:hover{color:var(--text);text-decoration:none}
-button.theme{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
-button.theme:hover{border-color:var(--accent)}
-.hero{padding:72px 0 56px}
-.hero .wrap{display:grid;grid-template-columns:1.4fr 1fr;gap:40px;align-items:center}
-.kicker{color:var(--accent-2);font-weight:600;font-size:14px;letter-spacing:.08em;text-transform:uppercase;margin:0 0 12px}
-h1{font-size:clamp(34px,5vw,54px);line-height:1.1;margin:0 0 16px;letter-spacing:-.02em}
-.lede{font-size:19px;color:var(--muted);margin:0 0 28px;max-width:34em}
+.pillbtn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 18px color-mix(in srgb,var(--accent) 28%,transparent)}
+.pillbtn:hover{text-decoration:none;filter:brightness(1.06)}
+button.theme{background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:999px;padding:6px 12px;font:inherit;font-size:14px;cursor:pointer}
+button.theme:hover{color:var(--text);border-color:var(--accent)}
+.hero{padding:84px 0 56px}
+.hero .wrap{display:grid;grid-template-columns:1.5fr 1fr;gap:48px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:8px;margin:0 0 22px;padding:7px 14px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--muted);font-size:14px}
+.kicker:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--accent)}
+h1{font-family:var(--head);font-weight:700;font-size:clamp(36px,5.6vw,66px);line-height:1.06;margin:0 0 22px;letter-spacing:-.025em}
+.grad{background:linear-gradient(90deg,var(--accent),var(--accent-3) 55%,var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lede{font-size:19px;color:var(--muted);margin:0 0 30px;max-width:34em}
+.lede strong{color:var(--text);font-weight:600}
 .cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-block;padding:11px 18px;border-radius:10px;font-weight:600;font-size:15px;border:1px solid var(--border);color:var(--text);background:var(--surface)}
+.btn{display:inline-block;padding:10px 18px;border-radius:999px;font-weight:600;font-size:15px;border:1px solid var(--border);color:var(--text);background:var(--surface)}
 .btn:hover{text-decoration:none;border-color:var(--accent)}
-.btn.primary{background:var(--accent);border-color:var(--accent);color:#0b1020}
-.photo-box{justify-self:center;width:min(100%,320px);aspect-ratio:1/1;border-radius:24px;overflow:hidden;border:1px solid var(--border);background:var(--surface-2);display:grid;place-items:center;position:relative}
+.photo-box{justify-self:center;width:min(100%,330px);aspect-ratio:1/1;border-radius:50%;overflow:hidden;border:4px solid var(--surface);box-shadow:0 0 0 1px var(--border),0 24px 50px color-mix(in srgb,var(--text) 16%,transparent);background:var(--surface-2);display:grid;place-items:center;position:relative}
 .photo-box img{width:100%;height:100%;object-fit:cover;display:block}
 .photo-box .fallback{position:absolute;inset:0;display:none;place-items:center;color:var(--muted);font-size:14px;text-align:center;padding:24px}
 .photo-box.nophoto .fallback{display:grid}
-section{padding:56px 0;border-top:1px solid var(--border)}
-h2{font-size:28px;margin:0 0 8px;letter-spacing:-.01em}
-.sub{color:var(--muted);margin:0 0 28px;max-width:46em}
-.about{display:grid;grid-template-columns:1.5fr 1fr;gap:32px}
-.about p{margin:0 0 14px}
-.facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
-.facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:15px}
-.facts dt{color:var(--muted)}
-.facts dd{margin:0}
+.stats{padding:8px 0 56px}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px}
+.stat b{display:block;font-family:var(--head);font-size:30px;line-height:1.1;letter-spacing:-.02em}
+.stat span{display:block;margin-top:6px;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+section{padding:64px 0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent-2);margin:0 0 10px}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.6vw,40px);line-height:1.15;margin:0 0 16px;letter-spacing:-.02em}
+.sub{color:var(--muted);margin:0 0 30px;max-width:46em}
+.prose{max-width:46em}
+.prose p{margin:0 0 16px}
+.threads{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:34px}
+.thread{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px}
+.thread .n{font-family:var(--head);font-weight:700;font-size:14px;color:var(--accent-3);letter-spacing:.1em}
+.thread h3{font-family:var(--head);font-size:20px;line-height:1.25;margin:8px 0 8px}
+.thread p{margin:0;color:var(--muted);font-size:15.5px}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:12px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;display:flex;flex-direction:column;gap:12px}
 .card:hover{border-color:var(--accent)}
-.card h3{margin:0;font-size:20px}
-.tag{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px;background:var(--surface-2);color:var(--accent-2);border:1px solid var(--border)}
+.card h3{font-family:var(--head);margin:0;font-size:21px;line-height:1.25}
+.tag{align-self:flex-start;font-size:12px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--accent-2);border:1px solid var(--border)}
 .card p{margin:0}
-.what{color:var(--text)}
-.status{color:var(--muted);font-size:15px;border-left:3px solid var(--border);padding-left:12px}
+.status{color:var(--muted);font-size:15px;border-left:3px solid var(--accent-2);padding-left:12px}
 .status strong{color:var(--text)}
 .card .go{margin-top:auto;font-weight:600}
-.contact ul{list-style:none;margin:0;padding:0;display:flex;gap:14px;flex-wrap:wrap}
-.contact a{display:inline-block;padding:10px 16px;border:1px solid var(--border);border-radius:10px;background:var(--surface);color:var(--text);font-weight:600}
-.contact a:hover{border-color:var(--accent);text-decoration:none}
-footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
+.about{display:grid;grid-template-columns:1.5fr 1fr;gap:36px}
+.about p{margin:0 0 14px}
+.facts{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px;align-self:start}
+.facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:15.5px}
+.facts dt{color:var(--muted)}
+.facts dd{margin:0}
+.contact ul{list-style:none;margin:0;padding:0;display:flex;gap:12px;flex-wrap:wrap}
+.contact a.chip{display:inline-block;padding:10px 18px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text);font-weight:600}
+.contact a.chip:hover{border-color:var(--accent);text-decoration:none}
+footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
 .todo{outline:2px dashed var(--warn);outline-offset:3px;border-radius:4px}
-@media (max-width:760px){
-  .hero{padding:48px 0 40px}
-  .hero .wrap,.about,.grid{grid-template-columns:1fr}
-  .photo-box{order:-1;width:min(70%,240px)}
+@media (max-width:820px){
+  .hero{padding:48px 0 36px}
+  .hero .wrap,.about,.grid,.threads{grid-template-columns:1fr}
+  .stats .wrap{grid-template-columns:repeat(2,1fr)}
+  .photo-box{order:-1;width:min(62%,240px)}
   .nav ul{gap:12px}
+  .nav li.hide-s{display:none}
 }
 </style>
 </head>
 <body>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="#top">Abhinav Anand</a>
+    <a class="brand" href="#top"><img src="assets/photo.jpg?v=2" alt="" onerror="this.remove()">Abhinav Anand</a>
     <nav aria-label="Main">
       <ul>
-        <li><a class="link" href="#about">About</a></li>
-        <li><a class="link" href="#projects">Projects</a></li>
-        <li><a class="link" href="#contact">Contact</a></li>
+        <li class="hide-s"><a class="link" href="#research">Research</a></li>
+        <li class="hide-s"><a class="link" href="#projects">Projects</a></li>
+        <li class="hide-s"><a class="link" href="#about">About</a></li>
+        <li class="hide-s"><a class="link" href="#contact">Contact</a></li>
         <li><button class="theme" id="theme" type="button" aria-label="Switch colour theme">Theme</button></li>
+        <li><a class="pillbtn" href="https://github.com/arion-a">GitHub</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <main id="top">
-  <section class="hero" style="border-top:0">
+  <section class="hero" style="padding-bottom:56px">
     <div class="wrap">
       <div>
-        <p class="kicker todo">YOUR ROLE, for example: Independent researcher</p>
-        <h1>Hi, I&rsquo;m Abhinav Anand.</h1>
-        <p class="lede todo">One or two sentences on what you do and what you are curious about.</p>
+        <p class="kicker">Researcher &middot; Representation Learning &middot; Video &amp; World Models</p>
+        <h1>What does a world model <span class="grad">actually represent</span>, and how would we know?</h1>
+        <p class="lede">I&rsquo;m <strong>Abhinav Anand</strong>. I study what self-supervised video models encode about the physical world: geometry, causes and time scales. I write the test and the baseline it has to beat <strong>before</strong> the run, then report the result either way.</p>
         <div class="cta">
-          <a class="btn primary" href="#projects">See my projects</a>
-          <a class="btn" href="https://github.com/arion-a">GitHub</a>
+          <a class="pillbtn" href="#projects">See the projects</a>
+          <a class="btn" href="#research">Research interests</a>
         </div>
       </div>
       <div class="photo-box" id="photo">
@@ -114,32 +147,36 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     </div>
   </section>
 
-  <section id="about">
+  <section class="stats" aria-label="At a glance">
     <div class="wrap">
-      <h2>About</h2>
-      <p class="sub">A short introduction, in your own words.</p>
-      <div class="about">
-        <div>
-          <p class="todo">Paragraph 1: who you are and what you work on.</p>
-          <p class="todo">Paragraph 2: your background and how you got here.</p>
-          <p class="todo">Paragraph 3: what you are looking for, or what you are building next.</p>
-        </div>
-        <aside class="facts" aria-label="Profile details">
-          <dl>
-            <dt>Focus</dt><dd class="todo">Your areas</dd>
-            <dt>Based in</dt><dd class="todo">City, country</dd>
-            <dt>Tools</dt><dd class="todo">Languages, frameworks</dd>
-            <dt>Currently</dt><dd class="todo">What you are doing now</dd>
-          </dl>
-        </aside>
+      <div class="stat"><b>5</b><span>public projects</span></div>
+      <div class="stat"><b>1</b><span>pre-registered pilot</span></div>
+      <div class="stat"><b>8 of 23</b><span>probe measurements above benchmark</span></div>
+      <div class="stat"><b>5 seeds</b><span>one split passes on all</span></div>
+    </div>
+  </section>
+
+  <section id="research" style="padding-top:24px">
+    <div class="wrap">
+      <p class="eyebrow">Research</p>
+      <h2>One question, seen from three sides.</h2>
+      <div class="prose">
+        <p>How fast a signal changes, which way gravity points, how far a camera turned: these look like separate problems. I treat them as one. Each asks what a learned representation keeps, and whether that can be measured against a simple baseline that could have explained the result just as well.</p>
+        <p>I am drawn to the plain version of each question, a controlled world where the truth is known, a linear map small enough to inspect, a gate fixed in advance. When a result falls short, the shortfall is the finding, and I report how far short.</p>
+      </div>
+      <div class="threads">
+        <div class="thread"><span class="n">01</span><h3>Structure by time scale</h3><p>Can a representation be split into a fast-changing part and a slow-changing part, and the slow part split again?</p></div>
+        <div class="thread"><span class="n">02</span><h3>Causes, not only trajectories</h3><p>Does a video model encode the cause of a motion, or only the path that cause produces?</p></div>
+        <div class="thread"><span class="n">03</span><h3>Geometry in frozen models</h3><p>How much 3D structure survives in a model nobody retrained, and at what scale does it appear?</p></div>
       </div>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" style="padding-top:24px">
     <div class="wrap">
-      <h2>Projects</h2>
-      <p class="sub">Open repositories. Each README states what was done, what is still a plan, and what was not tested.</p>
+      <p class="eyebrow">Projects</p>
+      <h2>Open repositories, honest status.</h2>
+      <p class="sub">Each README states what was done, what is still a plan, and what was not tested.</p>
       <div class="grid">
 
         <article class="card">
@@ -162,7 +199,7 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
           <span class="tag">Research</span>
           <h3>V-JEPA causal geometry</h3>
           <p class="what">A pre-registered pilot asking whether a frozen V-JEPA 2.1 video model represents the cause of motion (gravity) or only the trajectories that cause produces.</p>
-          <p class="status"><strong>Pilot complete, main hypothesis not supported.</strong> The gravity direction is more alike across scenes than for raw pixels, but it cannot be told apart from a baseline that tracks the object's trajectory.</p>
+          <p class="status"><strong>Pilot complete, main hypothesis not supported.</strong> The gravity direction is more alike across scenes than for raw pixels, but it cannot be told apart from a baseline that tracks the object&rsquo;s trajectory.</p>
           <a class="go" href="https://github.com/arion-a/V-JEPA-causal-geometry">View on GitHub &rarr;</a>
         </article>
 
@@ -170,7 +207,7 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
           <span class="tag">Research</span>
           <h3>World-Models: Geometric Consistency Probe</h3>
           <p class="what">Tests whether a frozen V-JEPA 2 video model represents 3D geometry, by fitting linear maps between its representations of rendered scenes before and after a known change.</p>
-          <p class="status"><strong>Mixed.</strong> Most small-scale tests fall below their controls. The linear map beats "assume nothing changed" from 10&deg; of camera rotation, and for yaw-only rotation it succeeds with about 1,000 training scenes.</p>
+          <p class="status"><strong>Mixed.</strong> Most small-scale tests fall below their controls. The linear map beats &ldquo;assume nothing changed&rdquo; from 10&deg; of camera rotation, and for yaw-only rotation it succeeds with about 1,000 training scenes.</p>
           <a class="go" href="https://github.com/arion-a/World-Models">View on GitHub &rarr;</a>
         </article>
 
@@ -186,14 +223,37 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
     </div>
   </section>
 
-  <section id="contact" class="contact">
+  <section id="about" style="padding-top:24px">
     <div class="wrap">
-      <h2>Contact</h2>
+      <p class="eyebrow">About</p>
+      <h2>A short introduction.</h2>
+      <div class="about">
+        <div>
+          <p class="todo">Paragraph 1: who you are and what you work on.</p>
+          <p class="todo">Paragraph 2: your background and how you got here.</p>
+          <p class="todo">Paragraph 3: what you are looking for, or what you are building next.</p>
+        </div>
+        <aside class="facts" aria-label="Profile details">
+          <dl>
+            <dt>Focus</dt><dd>Representation learning, video and world models</dd>
+            <dt>Based in</dt><dd class="todo">City, country</dd>
+            <dt>Tools</dt><dd class="todo">Languages, frameworks</dd>
+            <dt>Currently</dt><dd class="todo">What you are doing now</dd>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact" style="padding-top:24px">
+    <div class="wrap">
+      <p class="eyebrow">Get in touch</p>
+      <h2>Open to research conversations.</h2>
       <p class="sub">The best way to reach me.</p>
       <ul>
-        <li><a href="https://github.com/arion-a">GitHub</a></li>
-        <li><a class="todo" href="#contact">LinkedIn (add link)</a></li>
-        <li><a class="todo" href="#contact">Email (add address)</a></li>
+        <li><a class="chip" href="https://github.com/arion-a">GitHub</a></li>
+        <li><a class="chip todo" href="#contact">LinkedIn (add link)</a></li>
+        <li><a class="chip todo" href="#contact">Email (add address)</a></li>
       </ul>
     </div>
   </section>
@@ -209,7 +269,7 @@ footer{padding:32px 0 48px;color:var(--muted);font-size:14px;border-top:1px soli
   try{var saved=localStorage.getItem('theme'); if(saved){root.setAttribute('data-theme',saved)}}catch(e){}
   btn.addEventListener('click',function(){
     var cur=root.getAttribute('data-theme');
-    if(!cur){cur=window.matchMedia('(prefers-color-scheme: light)').matches?'light':'dark'}
+    if(!cur){cur=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light'}
     var next=cur==='dark'?'light':'dark';
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('theme',next)}catch(e){}
