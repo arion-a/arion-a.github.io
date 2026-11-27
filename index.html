@@ -108,7 +108,8 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.6vw,40px);line
 footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
 .about ul{margin:0 0 14px;padding-left:22px}
 .about li{margin:0 0 10px}
-.side{display:grid;gap:18px;align-self:start}
+.intro{display:grid;grid-template-columns:1.05fr 1fr;gap:44px;align-items:center}
+.intro .lede{margin:0;max-width:none}
 .mfig{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
 .mfig .mf-k{margin:0 0 4px;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .mfig h3{margin:0 0 14px;font-family:var(--head);font-size:21px;line-height:1.2;letter-spacing:-.01em}
@@ -121,14 +122,27 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
 .mf-t2{fill:var(--muted);font-family:Inter,system-ui,sans-serif}
 .mf-b{fill:var(--accent)}
 .mf-bn{fill:var(--bg);font:700 12.5px var(--head);text-anchor:middle}
-.about .mf-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font-size:14.5px;line-height:1.45}
-.about .mf-list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:0}
+.mf-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font-size:14.5px;line-height:1.45}
+.mf-list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:0}
 .mf-n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 12px/22px var(--head);text-align:center}
 .mf-list b{font-family:var(--head)}
+.mf-lv{display:flex;gap:6px;margin:14px 0 0;flex-wrap:wrap}
+.mf-pill{font:600 12.5px/1 var(--head);padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer}
+.mf-pill:hover{border-color:var(--accent);color:var(--text)}
+.mf-pill.on{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.mf-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mf-capr{display:flex;gap:14px;align-items:flex-start;justify-content:space-between;margin:12px 0 0;min-height:4.4em}
+.mfig .mf-cap{margin:0;font-size:14.5px;line-height:1.45}
+.mf-meter{display:flex;flex-direction:column;align-items:flex-end;gap:5px;flex:none}
+.mf-ml{font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.mf-bars{display:flex;gap:3px;align-items:flex-end}
+.mf-bars i{display:block;width:8px;border-radius:2px;background:var(--border);transition:background .4s}
+.mf-bars i:nth-child(1){height:8px}.mf-bars i:nth-child(2){height:13px}.mf-bars i:nth-child(3){height:18px}
+.mf-bars i.lit{background:var(--accent)}
 .todo{outline:2px dashed var(--warn);outline-offset:3px;border-radius:4px}
 @media (max-width:820px){
   .hero{padding:48px 0 36px}
-  .hero .wrap,.about,.grid,.threads{grid-template-columns:1fr}
+  .hero .wrap,.about,.intro,.grid,.threads{grid-template-columns:1fr}
   .stats .wrap{grid-template-columns:repeat(2,1fr)}
   .photo-box{order:-1;width:min(62%,240px)}
   .nav ul{gap:12px}
@@ -169,6 +183,55 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
       <div class="photo-box" id="photo">
         <img src="assets/photo.jpg?v=2" alt="Portrait of Abhinav Anand" width="640" height="640" onerror="this.parentNode.classList.add('nophoto');this.remove()">
         <div class="fallback">Photo goes here.<br>Save it as assets/photo.jpg</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intro" style="padding-top:24px">
+    <div class="wrap">
+      <div class="intro">
+        <div>
+          <p class="eyebrow">In brief</p>
+          <p class="lede">I am interested in working on the theoretical foundations of intelligence and self-supervised learning, turning rigorous theory into state-of-the-art engineering systems. My current focus is on world models, causal representation learning and efficient post-LLM training architectures. My most recent work is in recovering individual variables from observational data, organizing them into meaningful geometric structures within representation spaces, and learning efficient interactions between them.</p>
+        </div>
+        <figure class="mfig" style="margin:0">
+          <p class="mf-k">My working picture of intelligence</p>
+          <h3>Intelligence as a model of reality</h3>
+          <svg viewBox="0 0 400 285" role="img" aria-label="Diagram. Inside external reality, input data enters a model of reality and output leaves it. The model is separable from reality and manipulable. A moving dot inside the model shows richer, more fluid motion across three levels of reasoning: association, intervention and counterfactual.">
+            <defs><marker id="mfa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker></defs>
+            <rect class="mf-box" x="4" y="4" width="392" height="277" rx="16"/>
+            <text class="mf-t1" x="22" y="35" font-size="16">External reality</text>
+            <ellipse class="mf-model" cx="262" cy="140" rx="104" ry="60"/>
+            <ellipse class="mf-ring" cx="262" cy="140" rx="116" ry="72"/>
+            <g id="mf-dyn"></g>
+            <text class="mf-t1" x="262" y="134" font-size="17" text-anchor="middle">Model of</text>
+            <text class="mf-t1" x="262" y="156" font-size="17" text-anchor="middle">reality</text>
+            <text class="mf-t1" x="22" y="108" font-size="15" font-weight="600">Input data</text>
+            <path class="mf-arrow" d="M44 120 C 70 158, 110 158, 146 150" marker-end="url(#mfa)"/>
+            <path class="mf-arrow" d="M196 188 C 160 232, 120 242, 74 238" marker-end="url(#mfa)"/>
+            <text class="mf-t1" x="22" y="262" font-size="15" font-weight="600">Output</text>
+            <text class="mf-t2" x="82" y="262" font-size="12.5">(expression, action)</text>
+            <circle class="mf-b" cx="124" cy="103" r="12"/><text class="mf-bn" x="124" y="107.5">1</text>
+            <circle class="mf-b" cx="92" cy="226" r="12"/><text class="mf-bn" x="92" y="230.5">2</text>
+            <circle class="mf-b" cx="352" cy="94" r="12"/><text class="mf-bn" x="352" y="98.5">3</text>
+            <circle class="mf-b" cx="262" cy="202" r="12"/><text class="mf-bn" x="262" y="206.5">4</text>
+          </svg>
+          <div class="mf-lv" aria-label="Levels of reasoning">
+            <button type="button" class="mf-pill on" data-lv="0" aria-pressed="true">Association</button>
+            <button type="button" class="mf-pill" data-lv="1" aria-pressed="false">Intervention</button>
+            <button type="button" class="mf-pill" data-lv="2" aria-pressed="false">Counterfactual</button>
+          </div>
+          <div class="mf-capr">
+            <p class="mf-cap" aria-live="polite"><b>Association.</b> Seeing. The dot only drifts, noticing what goes with what.</p>
+            <div class="mf-meter" role="img" aria-label="Manipulability level"><span class="mf-ml">Manipulability</span><span class="mf-bars"><i class="lit"></i><i></i><i></i></span></div>
+          </div>
+          <ol class="mf-list">
+            <li><span class="mf-n">1</span><span class="mf-t"><b>Input.</b> Reality enters the model as data.</span></li>
+            <li><span class="mf-n">2</span><span class="mf-t"><b>Output.</b> The model expresses and acts.</span></li>
+            <li><span class="mf-n">3</span><span class="mf-t"><b>Separability.</b> The model is not reality, so it keeps correcting its own error.</span></li>
+            <li><span class="mf-n">4</span><span class="mf-t"><b>Manipulability.</b> The more of its representations can be manipulated, the greater its intelligence.</span></li>
+          </ol>
+        </figure>
       </div>
     </div>
   </section>
@@ -245,14 +308,12 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
       <h2>A short introduction.</h2>
       <div class="about">
         <div>
-          <p>I am interested in working on the theoretical foundations of intelligence and self-supervised learning, turning rigorous theory into state-of-the-art engineering systems. My current focus is on world models, causal representation learning and efficient post-LLM training architectures. My most recent work is in recovering individual variables from observational data, organizing them into meaningful geometric structures within representation spaces, and learning efficient interactions between them.</p>
           <p>I hold a B.S. from IIT Delhi, studied sociology at the Delhi School of Economics, and worked as an ML engineer before turning to AI research. Along the way I went deep into philosophy and the social sciences, and I often bring perspectives from philosophy and physics to the study of pressing theoretical questions about intelligence.</p>
           <p>Through my experiments I have come to believe that studying the geometry of representation space holds a powerful key to unlocking the interventional and counterfactual modes of reasoning. Identifying increasingly abstract individual variables from the observation data, and finding the best geometry in which to represent them and their composable interactions is my current direction of work.</p>
           <p>My approach towards the study of machine learning has come to be shaped by my explorations into sociology, philosophy and physics. Three thinkers have particularly shaped how I approach artificial intelligence. Thomas Kuhn showed that scientists work inside a paradigm that shapes which questions and observations count; my choice of research direction and questions is strictly informed by this view. Choosing a question is the most important research choice to make and must come only after we have scanned the other alternative choices and their likely consequences. Intuitions help. But there is no certainty.</p>
           <ul dir="ltr"><li>Jean Baudrillard (<em>Simulacra and Simulation</em>): asked how a copy of the world relates to the real thing. A world model faces the same question: it builds its own version of the world and has to stay faithful to the real one. This is always a pursuit of approximation that can never become exact. Minimizing the difference between approximate and exact is all an intelligent algorithm has to do (e.g. gradient learning, loss functions, backpropagation).</li><li>Gregory Bateson (<em>Steps to an Ecology of Mind</em>): defined information as "a difference that makes a difference". A causal variable is shockingly close to that idea: at every level it identifies something whose change changes the outcome. A difference of a difference is a powerful mathematical concept in differential calculus too. Here, we probably have a good framework to think through the problems.</li></ul>
           <p>Read together, they point to my rather unconventional but very simple view: that intelligence appears as an emergent consequence of motion within an abstract space, which can be referred to as consciousness. And consciousness must be emergent: it must come out of something prior, and in turn be the prior of something else, just like every other phenomenon in the universe. This is, curiously and excitingly, still unknown to humanity.</p>
         </div>
-        <div class="side">
         <aside class="facts" aria-label="Profile details">
           <dl>
             <dt>Focus</dt><dd>World models, causal representation learning, JEPA</dd>
@@ -262,35 +323,6 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
             <dt>Also draws on</dt><dd>Philosophy of science, physics</dd>
           </dl>
         </aside>
-        <figure class="mfig" style="margin:0">
-          <p class="mf-k">My working picture of intelligence</p>
-          <h3>Intelligence as a model of reality</h3>
-          <svg viewBox="0 0 400 285" role="img" aria-label="Diagram. Inside external reality, input data enters a model of reality and output leaves it. The model is separable from reality and manipulable.">
-            <defs><marker id="mfa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker></defs>
-            <rect class="mf-box" x="4" y="4" width="392" height="277" rx="16"/>
-            <text class="mf-t1" x="22" y="35" font-size="16">External reality</text>
-            <ellipse class="mf-model" cx="262" cy="140" rx="104" ry="60"/>
-            <ellipse class="mf-ring" cx="262" cy="140" rx="116" ry="72"/>
-            <text class="mf-t1" x="262" y="134" font-size="17" text-anchor="middle">Model of</text>
-            <text class="mf-t1" x="262" y="156" font-size="17" text-anchor="middle">reality</text>
-            <text class="mf-t1" x="22" y="108" font-size="15" font-weight="600">Input data</text>
-            <path class="mf-arrow" d="M44 120 C 70 158, 110 158, 146 150" marker-end="url(#mfa)"/>
-            <path class="mf-arrow" d="M196 188 C 160 232, 120 242, 74 238" marker-end="url(#mfa)"/>
-            <text class="mf-t1" x="22" y="262" font-size="15" font-weight="600">Output</text>
-            <text class="mf-t2" x="82" y="262" font-size="12.5">(expression, action)</text>
-            <circle class="mf-b" cx="124" cy="103" r="12"/><text class="mf-bn" x="124" y="107.5">1</text>
-            <circle class="mf-b" cx="92" cy="226" r="12"/><text class="mf-bn" x="92" y="230.5">2</text>
-            <circle class="mf-b" cx="352" cy="94" r="12"/><text class="mf-bn" x="352" y="98.5">3</text>
-            <circle class="mf-b" cx="262" cy="202" r="12"/><text class="mf-bn" x="262" y="206.5">4</text>
-          </svg>
-          <ol class="mf-list">
-            <li><span class="mf-n">1</span><span class="mf-t"><b>Input.</b> Reality enters the model as data.</span></li>
-            <li><span class="mf-n">2</span><span class="mf-t"><b>Output.</b> The model expresses and acts.</span></li>
-            <li><span class="mf-n">3</span><span class="mf-t"><b>Separability.</b> The model is not reality, so it keeps correcting its own error.</span></li>
-            <li><span class="mf-n">4</span><span class="mf-t"><b>Manipulability.</b> The more of its representations can be manipulated, the greater its intelligence.</span></li>
-          </ol>
-        </figure>
-        </div>
       </div>
     </div>
   </section>
@@ -358,7 +390,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
   document.body.appendChild(bar);
   document.getElementById('eb-exit').onclick=function(){dirty=false;location.href=location.pathname};
   document.getElementById('eb-dl').onclick=function(){
-    var c=document.documentElement.cloneNode(true);
+    var c=document.documentElement.cloneNode(true);var dg=c.querySelector('#mf-dyn');if(dg)dg.innerHTML='';
     ['#editbar','#edit-style'].forEach(function(s){var n=c.querySelector(s); if(n)n.remove()});
     c.querySelectorAll('[contenteditable],[spellcheck]').forEach(function(n){n.removeAttribute('contenteditable');n.removeAttribute('spellcheck')});
     c.removeAttribute('data-theme');
@@ -370,5 +402,77 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
 </script>
 
 
+<script>
+(function(){
+  var svg=document.querySelector('.mfig svg'),g=svg&&svg.querySelector('#mf-dyn');
+  if(!g)return;
+  g.innerHTML='';
+  var NS='http://www.w3.org/2000/svg',CX=262,CY=140,N=28,DT=0.04,HOLD=7.5;
+  var pills=[].slice.call(document.querySelectorAll('.mf-pill'));
+  var cap=document.querySelector('.mf-cap'),bars=[].slice.call(document.querySelectorAll('.mf-bars i'));
+  var TXT=[['Association.',' Seeing. The dot only drifts, noticing what goes with what.'],
+           ['Intervention.',' Doing. The dot is pushed and steered, learning what happens when something changes.'],
+           ['Counterfactual.',' Imagining. A ghost dot traces the path that did not happen.']];
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function el(n,a){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);g.appendChild(e);return e}
+  function P(l,t){
+    if(l===0)return[64*Math.sin(t*.8),6*Math.sin(t*1.6)];
+    if(l===1)return[72*Math.sin(t*.95),34*Math.sin(t*1.9+.5)];
+    return[72*Math.sin(t+.3),34*Math.sin(t*1.5)+5*Math.sin(t*3.1)];
+  }
+  function G(t){return[72*Math.sin(t+2.2),34*Math.sin(t*1.5+1.7)+5*Math.sin(t*3.1+1)]}
+  var lv=0,prev=0,tc=-99,last=0,gOp=0,run=false,vis=true,i;
+  function now(){return performance.now()/1000}
+  function blend(t,time){
+    var s=Math.min(1,(time-tc)/1.2);s=s*s*(3-2*s);
+    var a=P(prev,t),b=P(lv,t);return[a[0]+(b[0]-a[0])*s,a[1]+(b[1]-a[1])*s];
+  }
+  var tr=[],gt=[],dot,ghost;
+  function build(){
+    g.innerHTML='';tr=[];gt=[];
+    for(i=N-1;i>=0;i--)tr[i]=el('circle',{r:1,style:'fill:var(--accent);opacity:0'});
+    for(i=17;i>=0;i--)gt[i]=el('circle',{r:1,style:'fill:var(--accent-2);opacity:0'});
+    ghost=el('circle',{r:6,style:'fill:none;stroke:var(--accent-2);stroke-width:2;stroke-dasharray:3 2;opacity:0'});
+    dot=el('circle',{r:6.5,style:'fill:var(--accent)'});
+  }
+  function setLv(n,t){
+    prev=lv;lv=n;tc=last=t;
+    pills.forEach(function(b,k){var on=k===n;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on?'true':'false')});
+    bars.forEach(function(b,k){b.classList.toggle('lit',k<=n)});
+    if(cap)cap.innerHTML='<b>'+TXT[n][0]+'</b>'+TXT[n][1];
+  }
+  function frame(){
+    if(!run)return;
+    var tm=now(),p,k,q;
+    if(tm-last>HOLD)setLv((lv+1)%3,tm);
+    p=blend(tm,tm);dot.setAttribute('cx',CX+p[0]);dot.setAttribute('cy',CY+p[1]);
+    for(k=0;k<N;k++){q=blend(tm-(k+1)*DT,tm);tr[k].setAttribute('cx',CX+q[0]);tr[k].setAttribute('cy',CY+q[1]);
+      tr[k].setAttribute('r',(5.6*(1-k/N)+1).toFixed(2));tr[k].style.opacity=(0.5*(1-k/N)).toFixed(3)}
+    gOp+=((lv===2?1:0)-gOp)*0.06;
+    q=G(tm);ghost.setAttribute('cx',CX+q[0]);ghost.setAttribute('cy',CY+q[1]);ghost.style.opacity=gOp.toFixed(3);
+    for(k=0;k<gt.length;k++){q=G(tm-(k+1)*DT*1.4);gt[k].setAttribute('cx',CX+q[0]);gt[k].setAttribute('cy',CY+q[1]);
+      gt[k].setAttribute('r',(3.6*(1-k/gt.length)+.8).toFixed(2));gt[k].style.opacity=(0.4*gOp*(1-k/gt.length)).toFixed(3)}
+    requestAnimationFrame(frame);
+  }
+  function staticDraw(){
+    g.innerHTML='';var d='',e,q;
+    for(i=0;i<=420;i++){q=P(lv,i*.15);d+=(i?'L':'M')+(CX+q[0]).toFixed(1)+' '+(CY+q[1]).toFixed(1)}
+    el('path',{d:d,style:'fill:none;stroke:var(--accent);stroke-width:2;opacity:.45'});
+    if(lv===2){d='';for(i=0;i<=420;i++){q=G(i*.15);d+=(i?'L':'M')+(CX+q[0]).toFixed(1)+' '+(CY+q[1]).toFixed(1)}
+      el('path',{d:d,style:'fill:none;stroke:var(--accent-2);stroke-width:2;stroke-dasharray:3 3;opacity:.6'})}
+    q=P(lv,0);el('circle',{cx:CX+q[0],cy:CY+q[1],r:6.5,style:'fill:var(--accent)'});
+  }
+  pills.forEach(function(b){b.addEventListener('click',function(){
+    var n=+b.getAttribute('data-lv');setLv(n,now());if(reduce)staticDraw();
+  })});
+  function start(){if(reduce||run||!vis)return;run=true;requestAnimationFrame(frame)}
+  if(reduce){setLv(0,now());staticDraw();return}
+  build();setLv(0,now());tc=-99;
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){vis=en[0].isIntersecting;if(vis)start();else run=false},{threshold:0}).observe(svg);
+  }
+  start();
+})();
+</script>
 </body>
 </html>
