@@ -96,6 +96,13 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.6vw,40px);line
 .facts dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:15.5px}
 .facts dt{color:var(--muted)}
 .facts dd{margin:0}
+.timeline{list-style:none;margin:0;padding:0 0 0 22px;border-left:2px solid var(--border);max-width:46em}
+.timeline li{position:relative;padding:0 0 26px 18px}
+.timeline li:last-child{padding-bottom:0}
+.timeline li:before{content:"";position:absolute;left:-30px;top:7px;width:12px;height:12px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px var(--bg)}
+.timeline .when{display:block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2)}
+.timeline h3{font-family:var(--head);font-size:19px;line-height:1.3;margin:4px 0 2px}
+.timeline p{margin:0;color:var(--muted);font-size:15.5px}
 .contact ul{list-style:none;margin:0;padding:0;display:flex;gap:12px;flex-wrap:wrap}
 .contact a.chip{display:inline-block;padding:10px 18px;border:1px solid var(--border);border-radius:999px;background:var(--surface);color:var(--text);font-weight:600}
 .contact a.chip:hover{border-color:var(--accent);text-decoration:none}
@@ -120,6 +127,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
         <li class="hide-s"><a class="link" href="#research">Research</a></li>
         <li class="hide-s"><a class="link" href="#projects">Projects</a></li>
         <li class="hide-s"><a class="link" href="#about">About</a></li>
+        <li class="hide-s"><a class="link" href="#trajectory">Trajectory</a></li>
         <li class="hide-s"><a class="link" href="#contact">Contact</a></li>
         <li><button class="theme" id="theme" type="button" aria-label="Switch colour theme">Theme</button></li>
         <li><a class="pillbtn" href="https://github.com/arion-a">GitHub</a></li>
@@ -230,18 +238,33 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
       <div class="about">
         <div>
           <p>I work on the mathematical foundations of intelligence, with a current focus on causal representation learning. I am interested in recovering causal variables from observational data, organizing them into meaningful geometric structures within representation spaces, and learning efficient interactions between them.</p>
-          <p>I studied engineering at IIT Delhi and have since gone deep into sociology and philosophy of science, especially the work of Thomas Kuhn and Noam Chomsky. I increasingly bring perspectives from philosophy and physics to theoretical questions about intelligence.</p>
+          <p>I hold a B.S. from IIT Delhi, studied sociology at the Delhi School of Economics, and worked as an ML engineer before turning to independent research. Along the way I went deep into philosophy of science, especially the work of Thomas Kuhn and Noam Chomsky. I increasingly bring perspectives from philosophy and physics to theoretical questions about intelligence.</p>
           <p>I believe the next frontier of AI, a post-LLM architecture, goes through causal representation learning. My focus is on studying the geometry of representation space: identifying increasingly abstract individual variables from input data, and finding the best geometry in which to represent them.</p>
         </div>
         <aside class="facts" aria-label="Profile details">
           <dl>
             <dt>Focus</dt><dd>Causal representation learning</dd>
-            <dt>Education</dt><dd>Engineering, IIT Delhi</dd>
+            <dt>Education</dt><dd>B.S., IIT Delhi (2020)</dd>
+            <dt>Experience</dt><dd>ML Engineer, Baaz Bikes</dd>
+            <dt>Now</dt><dd>Independent research, 2026 &ndash; present</dd>
             <dt>Also draws on</dt><dd>Philosophy of science, physics</dd>
             <dt>Thesis</dt><dd>Post-LLM AI goes through causal representation learning</dd>
           </dl>
         </aside>
       </div>
+    </div>
+  </section>
+
+  <section id="trajectory" style="padding-top:24px">
+    <div class="wrap">
+      <p class="eyebrow">Trajectory</p>
+      <h2>From engineering to the foundations of intelligence.</h2>
+      <ol class="timeline">
+        <li><span class="when">2020</span><h3>B.S., IIT Delhi</h3><p>Engineering degree.</p></li>
+        <li><span class="when">Non-degree, 3 semesters</span><h3>Sociology, Delhi School of Economics</h3><p>Exposure to sociology and the philosophy of science, in particular the work of Thomas Kuhn and Noam Chomsky.</p></li>
+        <li><span class="when">Industry</span><h3>ML Engineer, Baaz Bikes</h3><p>Machine learning at a fast-growing electric-bike ecosystem in India.</p></li>
+        <li><span class="when">2026 &ndash; present</span><h3>Independent study</h3><p>Research on causal representation learning and the geometry of representation space.</p></li>
+      </ol>
     </div>
   </section>
 
