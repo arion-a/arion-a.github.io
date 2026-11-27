@@ -236,7 +236,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
       <p class="eyebrow">About</p>
       <h2>A short introduction.</h2>
       <div class="about">
-        <div>
+        <div id="about-text">
           <p>I work on the mathematical foundations of intelligence, with a current focus on causal representation learning. I am interested in recovering causal variables from observational data, organizing them into meaningful geometric structures within representation spaces, and learning efficient interactions between them.</p>
           <p>I hold a B.S. from IIT Delhi, studied sociology at the Delhi School of Economics, and worked as an ML engineer before turning to AI research. Along the way I went deep into philosophy and the social sciences, and I increasingly bring perspectives from philosophy and physics to theoretical questions about intelligence.</p>
           <p>My focus is on studying the geometry of representation space: identifying increasingly abstract individual variables from input data, and finding the best geometry in which to represent them.</p>
@@ -298,6 +298,12 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
     root.setAttribute('data-theme',next);
     try{localStorage.setItem('theme',next)}catch(e){}
   });
+})();
+(function(){
+  var box=document.getElementById('about-text'); if(!box||!window.fetch) return;
+  fetch('content/about.html?'+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.text():null}).then(function(h){
+    if(h&&h.indexOf('<p')>-1){box.innerHTML=h}
+  }).catch(function(){});
 })();
 </script>
 </body>
