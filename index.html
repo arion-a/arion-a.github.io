@@ -108,6 +108,23 @@ h2{font-family:var(--head);font-weight:700;font-size:clamp(28px,3.6vw,40px);line
 footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px solid var(--border)}
 .about ul{margin:0 0 14px;padding-left:22px}
 .about li{margin:0 0 10px}
+.side{display:grid;gap:18px;align-self:start}
+.mfig{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.mfig .mf-k{margin:0 0 4px;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.mfig h3{margin:0 0 14px;font-family:var(--head);font-size:21px;line-height:1.2;letter-spacing:-.01em}
+.mfig svg{width:100%;height:auto;display:block}
+.mf-box{fill:var(--surface-2);stroke:var(--border);stroke-width:2}
+.mf-model{fill:var(--surface);stroke:var(--accent);stroke-width:3}
+.mf-ring{fill:none;stroke:var(--accent);stroke-width:2;stroke-dasharray:5 5}
+.mf-arrow{fill:none;stroke:var(--muted);stroke-width:2.2}
+.mf-t1{fill:var(--text);font-family:var(--head);font-weight:700}
+.mf-t2{fill:var(--muted);font-family:Inter,system-ui,sans-serif}
+.mf-b{fill:var(--accent)}
+.mf-bn{fill:var(--bg);font:700 12.5px var(--head);text-anchor:middle}
+.about .mf-list{list-style:none;margin:16px 0 0;padding:0;display:grid;gap:11px;font-size:14.5px;line-height:1.45}
+.about .mf-list li{display:grid;grid-template-columns:24px 1fr;gap:10px;align-items:start;margin:0}
+.mf-n{width:22px;height:22px;border-radius:50%;background:var(--accent);color:var(--bg);font:700 12px/22px var(--head);text-align:center}
+.mf-list b{font-family:var(--head)}
 .todo{outline:2px dashed var(--warn);outline-offset:3px;border-radius:4px}
 @media (max-width:820px){
   .hero{padding:48px 0 36px}
@@ -235,6 +252,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
           <ul dir="ltr"><li>Jean Baudrillard (<em>Simulacra and Simulation</em>): asked how a copy of the world relates to the real thing. A world model faces the same question: it builds its own version of the world and has to stay faithful to the real one. This is always a pursuit of approximation that can never become exact. Minimizing the difference between approximate and exact is all an intelligent algorithm has to do (e.g. gradient learning, loss functions, backpropagation).</li><li>Gregory Bateson (<em>Steps to an Ecology of Mind</em>): defined information as "a difference that makes a difference". A causal variable is shockingly close to that idea: at every level it identifies something whose change changes the outcome. A difference of a difference is a powerful mathematical concept in differential calculus too. Here, we probably have a good framework to think through the problems.</li></ul>
           <p>Read together, they point to my rather unconventional but very simple view: that intelligence appears as an emergent consequence of motion within an abstract space, which can be referred to as consciousness. And consciousness must be emergent: it must come out of something prior, and in turn be the prior of something else, just like every other phenomenon in the universe. This is, curiously and excitingly, still unknown to humanity.</p>
         </div>
+        <div class="side">
         <aside class="facts" aria-label="Profile details">
           <dl>
             <dt>Focus</dt><dd>World models, causal representation learning, JEPA</dd>
@@ -244,6 +262,35 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
             <dt>Also draws on</dt><dd>Philosophy of science, physics</dd>
           </dl>
         </aside>
+        <figure class="mfig" style="margin:0">
+          <p class="mf-k">My working picture of intelligence</p>
+          <h3>Intelligence as a model of reality</h3>
+          <svg viewBox="0 0 400 285" role="img" aria-label="Diagram. Inside external reality, input data enters a model of reality and output leaves it. The model is separable from reality and manipulable.">
+            <defs><marker id="mfa" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" style="fill:var(--muted)"/></marker></defs>
+            <rect class="mf-box" x="4" y="4" width="392" height="277" rx="16"/>
+            <text class="mf-t1" x="22" y="35" font-size="16">External reality</text>
+            <ellipse class="mf-model" cx="262" cy="140" rx="104" ry="60"/>
+            <ellipse class="mf-ring" cx="262" cy="140" rx="116" ry="72"/>
+            <text class="mf-t1" x="262" y="134" font-size="17" text-anchor="middle">Model of</text>
+            <text class="mf-t1" x="262" y="156" font-size="17" text-anchor="middle">reality</text>
+            <text class="mf-t1" x="22" y="108" font-size="15" font-weight="600">Input data</text>
+            <path class="mf-arrow" d="M44 120 C 70 158, 110 158, 146 150" marker-end="url(#mfa)"/>
+            <path class="mf-arrow" d="M196 188 C 160 232, 120 242, 74 238" marker-end="url(#mfa)"/>
+            <text class="mf-t1" x="22" y="262" font-size="15" font-weight="600">Output</text>
+            <text class="mf-t2" x="82" y="262" font-size="12.5">(expression, action)</text>
+            <circle class="mf-b" cx="124" cy="103" r="12"/><text class="mf-bn" x="124" y="107.5">1</text>
+            <circle class="mf-b" cx="92" cy="226" r="12"/><text class="mf-bn" x="92" y="230.5">2</text>
+            <circle class="mf-b" cx="352" cy="94" r="12"/><text class="mf-bn" x="352" y="98.5">3</text>
+            <circle class="mf-b" cx="262" cy="202" r="12"/><text class="mf-bn" x="262" y="206.5">4</text>
+          </svg>
+          <ol class="mf-list">
+            <li><span class="mf-n">1</span><span class="mf-t"><b>Input.</b> Reality enters the model as data.</span></li>
+            <li><span class="mf-n">2</span><span class="mf-t"><b>Output.</b> The model expresses and acts.</span></li>
+            <li><span class="mf-n">3</span><span class="mf-t"><b>Separability.</b> The model is not reality, so it keeps correcting its own error.</span></li>
+            <li><span class="mf-n">4</span><span class="mf-t"><b>Manipulability.</b> The more of its representations can be manipulated, the greater its intelligence.</span></li>
+          </ol>
+        </figure>
+        </div>
       </div>
     </div>
   </section>
@@ -293,7 +340,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
 /* Edit mode: open this page with ?edit at the end of the address. Visitors never see it. */
 (function(){
   if(!/[?&]edit\b/.test(location.search)) return;
-  var SEL='h1,h2,h3,p,dt,dd,.stat b,.stat span,.eyebrow,.thread .n,.when,.kicker,.brand,.go,.chip,.btn,.pillbtn,.tag';
+  var SEL='h1,h2,h3,p,dt,dd,.stat b,.stat span,.eyebrow,.thread .n,.when,.kicker,.brand,.go,.chip,.btn,.pillbtn,.tag,.mf-t';
   var style=document.createElement('style'); style.id='edit-style';
   style.textContent='[contenteditable]{outline:1px dashed rgba(42,111,184,.55);outline-offset:3px;cursor:text}[contenteditable]:focus{outline:2px solid #2a6fb8;background:rgba(42,111,184,.08)}#editbar{position:fixed;left:50%;bottom:16px;transform:translateX(-50%);z-index:99;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;max-width:94vw;padding:10px 14px;border-radius:14px;background:#073642;color:#fdf6e3;font:14px/1.4 system-ui,sans-serif;box-shadow:0 10px 30px rgba(0,0,0,.35)}#editbar button{font:inherit;font-weight:600;padding:7px 14px;border:0;border-radius:999px;cursor:pointer;background:#2aa198;color:#fff}#editbar button.sec{background:transparent;border:1px solid #93a1a1;color:#fdf6e3}';
   document.head.appendChild(style);
