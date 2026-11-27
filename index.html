@@ -313,7 +313,7 @@ footer{padding:32px 0 52px;color:var(--muted);font-size:14px;border-top:1px soli
     el.setAttribute('contenteditable','true'); el.setAttribute('spellcheck','true');
     el.addEventListener('input',function(){dirty=true});
   });
-  document.addEventListener('click',function(e){var a=e.target.closest('a'); if(a&&!e.target.closest('#editbar')){e.preventDefault()}},true);
+  document.addEventListener('click',function(e){var a=e.target.closest('a'); if(a&&!a.hasAttribute('download')&&!e.target.closest('#editbar')){e.preventDefault()}},true);
   window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue=''}});
   var bar=document.createElement('div'); bar.id='editbar';
   bar.innerHTML='<span><b>Edit mode.</b> Click any text and type. Nothing is saved until you download.</span><button id="eb-dl" type="button">Download index.html</button><button id="eb-exit" class="sec" type="button">Exit</button>';
